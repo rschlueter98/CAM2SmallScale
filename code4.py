@@ -46,6 +46,7 @@ def loadStreams():
 def loadStream(url):
   cap = cv2.VideoCapture(url)
   if (cap.isOpened()):
+    print ("Stream: " + str(len(loadedStreams)) + " loaded")
     loadedStreams.append(cap)
   cores_load_current.pop()
 
