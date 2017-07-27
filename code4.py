@@ -44,10 +44,13 @@ def loadStreams():
 # Function to load one individual stream. Called from the loadStreams function, which controls threading for loading
 # image feeds.
 def loadStream(url):
-  cap = cv2.VideoCapture(url)
-  if (cap.isOpened()):
-    print ("Stream: " + str(len(loadedStreams)) + " loaded")
-    loadedStreams.append(cap)
+  try:
+    cap = cv2.VideoCapture(url)
+    if (cap.isOpened()):
+      print ("Stream: " + str(len(loadedStreams)) + " loaded")
+      loadedStreams.append(cap)
+    else:
+      print (str(url) + " failed to load")
   cores_load_current.pop()
 
 
