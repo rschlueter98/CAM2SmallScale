@@ -49,7 +49,7 @@ def loadStream(url):
     if (cap.isOpened()):
       print ("Stream: " + str(len(loadedStreams)) + " loaded")
       loadedStreams.append(cap)
-    else:
+  except:
       print (str(url) + " failed to load")
   cores_load_current.pop()
 
