@@ -76,7 +76,7 @@ def downloadImages():
 # controlls threading, and decides which stream the threads should download from
 def downloadImage(stream, threadNo):
   path = "/home/ryan/Documents/Summer_Research/mMaster/imageOutput"
-  for x in range(300):
+  for x in range(20):
     frame = stream.read()[1]
     ti = time.time()
     frame = cv2.resize(frame, (448,448))
@@ -90,7 +90,7 @@ def downloadImage(stream, threadNo):
 
 
 def loadAnalysis():
-  model_filename = "prototxt/yolo_small_deploy.prototxt"
+  model_filename = "prototxt/yolomkl2017.prototxt"
   weight_filename = "yolo_small.caffemodel"
 
   net = caffe.Net(model_filename, weight_filename, caffe.TEST)
@@ -246,8 +246,12 @@ if __name__ == '__main__':
 
   # Looping analyzing and downloading more
   while True:
+    print ("\n\n\n\n\n\n\n\n\nxxxxxxxxxxxxCURRENT TIME: " + str(time.time()-startTime) + " xxxxxxxxxxxxxxxx\n\n\n\n\n\n\n\n\n")
     time.sleep(5)
-    if len(imageData)<500:
+    if len(imageData)<50:
       downloadImages()
       while(len(cores_download_current)>0):
         time.sleep(0.5)
+    if ((time.time()-startTime)>30):
+      exit()
+
