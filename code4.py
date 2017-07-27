@@ -34,10 +34,8 @@ StartTime = 0
 def loadStreams():
   streamsDatabase = open("m3u8s3.txt")
   for line in streamsDatabase:
-    print ("here" + str(len(cores_load_current)))
     t = threading.Thread(target=loadStream, args=(line,))
     t.start()
-    print ("there" + str(len(cores_load_current)))
     cores_load_current.append(t)
 
 
@@ -78,7 +76,7 @@ def downloadImages():
 # controlls threading, and decides which stream the threads should download from
 def downloadImage(stream, threadNo):
   path = "/home/ryan/Documents/Summer_Research/mMaster/imageOutput"
-  for x in range(20):
+  for x in range(300):
     frame = stream.read()[1]
     ti = time.time()
     frame = cv2.resize(frame, (448,448))
@@ -249,7 +247,7 @@ if __name__ == '__main__':
   # Looping analyzing and downloading more
   while True:
     time.sleep(5)
-    if len(imageData)<50:
+    if len(imageData)<500:
       downloadImages()
       while(len(cores_download_current)>0):
         time.sleep(0.5)
