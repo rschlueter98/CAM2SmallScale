@@ -248,10 +248,8 @@ if __name__ == '__main__':
   while True:
     print ("\n\n\n\n\n\n\n\n\nxxxxxxxxxxxxCURRENT TIME: " + str(time.time()-startTime) + " xxxxxxxxxxxxxxxx\n\n\n\n\n\n\n\n\n")
     time.sleep(5)
-    if len(imageData)<50:
+    if len(imageData)<200:
       downloadImages()
       while(len(cores_download_current)>0):
         time.sleep(0.5)
-    if ((time.time()-startTime)>30):
-      exit()
 
