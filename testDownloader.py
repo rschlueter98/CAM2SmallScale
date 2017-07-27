@@ -12,9 +12,12 @@ url = ["http://video3.earthcam.com/fecnetwork/10072.flv/playlist.m3u8",
 
 cap = [0]*8
 for x in range(8):
-  cap[x]=cv2.VideoCapture(url[x])
-  if cap[x].isOpened():
-    print ("Stream: " + str(x) + " opened")
+  try:
+    cap[x]=cv2.VideoCapture(url[x])
+    if cap[x].isOpened():
+      print ("Stream: " + str(x) + " opened")
+  except:
+    print ("Stream: " + str(x) + " failed")
 
 for x in range(8):
   for y in range(10):
