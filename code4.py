@@ -34,8 +34,10 @@ StartTime = 0
 def loadStreams():
   streamsDatabase = open("m3u8s3.txt")
   for line in streamsDatabase:
+    print ("here" + str(len(cores_load_current)))
     t = threading.Thread(target=loadStream, args=(line,))
     t.start()
+    print ("there" + str(len(cores_load_current)))
     cores_load_current.append(t)
 
 
