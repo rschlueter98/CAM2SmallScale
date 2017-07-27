@@ -11,7 +11,7 @@ GPU_ID = 0  # Switch between 0 and 1 depending on the GPU you want to use.
 caffe.set_mode_cpu()
 
 
-cores_load_max = 8*5#6
+cores_load_max = 88*5#6
 cores_download_max = 8#2
 cores_yolo_max = 8#5
 
@@ -246,12 +246,9 @@ if __name__ == '__main__':
 
   # Looping analyzing and downloading more
   while True:
-    print ("\n\n\n\n\n\n\n\n\nxxxxxxxxxxxxCURRENT TIME: " + str(time.time()-startTime) + " xxxxxxxxxxxxxxxx\n\n\n\n\n\n\n\n\n")
     time.sleep(5)
     if len(imageData)<500:
       downloadImages()
       while(len(cores_download_current)>0):
         time.sleep(0.5)
-    if ((time.time()-startTime)>30):
-      exit()
 
