@@ -247,10 +247,10 @@ if __name__ == '__main__':
   # Looping analyzing and downloading more
   global imagesProcessed
   while True:
-    if imagesProcessed > 5:
+    if imagesProcessed > 2000:
       exit()
     time.sleep(1)
-    if len(imageData)<2000:
+    if len(imageData)<500:
       downloadImages()
       while(len(cores_download_current)>0):
         time.sleep(0.5)
