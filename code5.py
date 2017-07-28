@@ -81,9 +81,9 @@ def downloadImage(stream, threadNo):
   path = "/home/ryan/Documents/Summer_Research/mMaster/imageOutput"
   for x in range(300):
     frame = stream.read()[1]
-    ti = time.time()
+    # ti = time.time()
     frame = cv2.resize(frame, (448,448))
-    print ("Resizing time" + str(time.time()-ti))
+    # print ("Resizing time" + str(time.time()-ti))
     # filename = ("z_" + "n" + str(saveThreadCounter) + "t" + str(threadNo) + "img" + str(x) + ".jpg")
     # fullpath = os.path.join(path, filename)
     # cv2.imwrite(str(fullpath), frame)
