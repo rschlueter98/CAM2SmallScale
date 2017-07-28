@@ -83,7 +83,7 @@ def downloadImage(stream, threadNo):
     try:
       frame = stream.read()[1]
       # ti = time.time()
-      frame = cv2.resize(frame, (448,448))
+      # frame = cv2.resize(frame, (448,448))
       # print ("Resizing time" + str(time.time()-ti))
       # filename = ("z_" + "n" + str(saveThreadCounter) + "t" + str(threadNo) + "img" + str(x) + ".jpg")
       # fullpath = os.path.join(path, filename)
@@ -116,6 +116,7 @@ def analyze(net, transformer):
       # img_filename = savedImagesPaths.pop()
       # img = caffe.io.load_image(img_filename)  # load the image using caffe io
       img = imageData.pop()
+      img = cv2.resize(img, (448, 448))
       # ti = time.time()
       array = transformer.preprocess('data', img)
       # print ("\t\t\tPreprocess Time" + str(time.time() - ti))
