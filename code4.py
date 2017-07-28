@@ -11,9 +11,9 @@ GPU_ID = 0  # Switch between 0 and 1 depending on the GPU you want to use.
 caffe.set_mode_cpu()
 
 
-cores_load_max = 88*5#6
-cores_download_max = 88#2
-cores_yolo_max = 88#5
+cores_load_max = 1*5#6
+cores_download_max = 1#2
+cores_yolo_max = 1#5
 
 cores_load_current = []
 cores_download_current = []
