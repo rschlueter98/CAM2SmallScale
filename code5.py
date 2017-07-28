@@ -93,7 +93,7 @@ def downloadImage(stream, threadNo):
 
 
 def loadAnalysis():
-  model_filename = "prototxt/yolomkl2017.prototxt"
+  model_filename = "prototxt/yolo_small_deploy.prototxt"
   weight_filename = "yolo_small.caffemodel"
 
   net = caffe.Net(model_filename, weight_filename, caffe.TEST)
@@ -106,9 +106,9 @@ def loadAnalysis():
     t.start()
 
 def analyze(net, transformer):
-  while True:
-    breaker = False
-    try:
+  try:
+    while True:
+      breaker = False
       # img_filename = savedImagesPaths.pop()
       # img = caffe.io.load_image(img_filename)  # load the image using caffe io
       img = imageData.pop()
@@ -131,15 +131,9 @@ def analyze(net, transformer):
       if (imagesProcessed > 2000):
         print ("Thread Exiting")
         exit()
-    except Exception as e:
-      if e == KeyboardInterrupt:
-        print ("breakingbreakingbreakingbreaking")
-        breaker = True
-        break
-      print e
-      time.sleep(0.25)
-    if breaker:
-      break
+  except KeyboardInterrupt:
+    print ("Exiting")
+    exit()
 
 
 def interpret_output(output, img_width, img_height):
