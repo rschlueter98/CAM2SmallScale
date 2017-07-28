@@ -132,7 +132,7 @@ def analyze(net, transformer):
       print '\nFILE: {0} \tAvg FPS: {1}'.format(str(imagesProcessed), str(avg_fps)[:5])
       results = interpret_output(out['result'][0], img.shape[1], img.shape[0])  # fc27 instead of fc12 for yolo_small
       show_results(results)
-      if (imagesProcessed > 2000):
+      if (imagesProcessed > 3000):
         print ("Thread Exiting")
         exit()
   except KeyboardInterrupt:
@@ -251,7 +251,7 @@ if __name__ == '__main__':
   # Looping analyzing and downloading more
   global imagesProcessed
   while True:
-    if imagesProcessed > 2000:
+    if imagesProcessed > 3000:
       exit()
     time.sleep(1)
     if len(imageData)<500:
