@@ -238,13 +238,13 @@ if __name__ == '__main__':
   # raw_input("Press Enter to begin downloading 1500 images, followed by running YOLO on those images")
   print ("Downloading initial image set")
   ti = time.time()
-  global startTime
-  startTime = time.time()
 
   downloadImages()
   while (len(cores_download_current) > 0):
     time.sleep(0.05)
   print ("Number of images downloaded: " + str(len(savedImagesPaths)))
+  global startTime
+  startTime = time.time()
 
   # Load yolo model and start analysis
   loadAnalysis()
