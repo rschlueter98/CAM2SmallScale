@@ -83,7 +83,7 @@ def downloadImage(stream, threadNo):
     try:
       frame = stream.read()[1]
       # ti = time.time()
-      # frame = cv2.resize(frame, (448,448))
+      frame = cv2.resize(frame, (448,448))
       # print ("Resizing time" + str(time.time()-ti))
       # filename = ("z_" + "n" + str(saveThreadCounter) + "t" + str(threadNo) + "img" + str(x) + ".jpg")
       # fullpath = os.path.join(path, filename)
@@ -116,7 +116,6 @@ def analyze(net, transformer):
       # img_filename = savedImagesPaths.pop()
       # img = caffe.io.load_image(img_filename)  # load the image using caffe io
       img = imageData.pop()
-      img = cv2.resize(img, (448, 448))
       # ti = time.time()
       array = transformer.preprocess('data', img)
       # print ("\t\t\tPreprocess Time" + str(time.time() - ti))
@@ -237,12 +236,12 @@ if __name__ == '__main__':
 
   # Initial downloading of images
   # raw_input("Press Enter to begin downloading 1500 images, followed by running YOLO on those images")
-  # print ("Downloading initial image set")
+  print ("Downloading initial image set")
   ti = time.time()
   downloadImages()
   while (len(cores_download_current) > 0):
     time.sleep(0.05)
-  # print ("Number of images downloaded: " + str(len(savedImagesPaths)))
+  print ("Number of images downloaded: " + str(len(savedImagesPaths)))
   global startTime
   startTime = time.time()
 
