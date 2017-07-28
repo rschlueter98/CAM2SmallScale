@@ -132,7 +132,7 @@ def analyze(net, transformer):
       print '\nFILE: {0} \tAvg FPS: {1}'.format(str(imagesProcessed), str(avg_fps)[:5])
       results = interpret_output(out['result'][0], img.shape[1], img.shape[0])  # fc27 instead of fc12 for yolo_small
       show_results(results)
-      if (imagesProcessed > 3000):
+      if (imagesProcessed > 2000):
         print ("Thread Exiting")
         exit()
   except KeyboardInterrupt:
@@ -238,13 +238,12 @@ if __name__ == '__main__':
   # raw_input("Press Enter to begin downloading 1500 images, followed by running YOLO on those images")
   print ("Downloading initial image set")
   ti = time.time()
-  global startTime
-  startTime = time.time()
-
   downloadImages()
   while (len(cores_download_current) > 0):
     time.sleep(0.05)
   print ("Number of images downloaded: " + str(len(savedImagesPaths)))
+  global startTime
+  startTime = time.time()
 
   # Load yolo model and start analysis
   loadAnalysis()
@@ -252,7 +251,7 @@ if __name__ == '__main__':
   # Looping analyzing and downloading more
   global imagesProcessed
   while True:
-    if imagesProcessed > 3000:
+    if imagesProcessed > 2000:
       exit()
     time.sleep(1)
     if len(imageData)<500:
