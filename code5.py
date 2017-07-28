@@ -79,7 +79,7 @@ def downloadImages():
 # controlls threading, and decides which stream the threads should download from
 def downloadImage(stream, threadNo):
   path = "/home/ryan/Documents/Summer_Research/mMaster/imageOutput"
-  for x in range(300):
+  for x in range((3000)/(len(loadedStreams))):
     try:
       frame = stream.read()[1]
       # ti = time.time()
