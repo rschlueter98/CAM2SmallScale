@@ -11,9 +11,9 @@ GPU_ID = 0  # Switch between 0 and 1 depending on the GPU you want to use.
 caffe.set_mode_cpu()
 
 
-cores_load_max = 8*5#6
-cores_download_max = 8#2
-cores_yolo_max = 8#5
+cores_load_max = 88*5#6
+cores_download_max = 88#2
+cores_yolo_max = 88#5
 
 cores_load_current = []
 cores_download_current = []
@@ -22,6 +22,9 @@ cores_yolo_current = []
 loadedStreams = []
 imageData = []
 savedImagesPaths = []
+
+fpses = []
+
 global saveThreadCounter
 saveThreadCounter = 0
 global imagesProcessed
@@ -90,7 +93,7 @@ def downloadImage(stream, threadNo):
 
 
 def loadAnalysis():
-  model_filename = "prototxt/yolomkl2017.prototxt"
+  model_filename = "prototxt/yolo_small_deploy.prototxt"
   weight_filename = "yolo_small.caffemodel"
 
   net = caffe.Net(model_filename, weight_filename, caffe.TEST)
@@ -115,7 +118,7 @@ def analyze(net, transformer):
 
       ti = time.time()
       out = net.forward_all(data=np.asarray([array]))
-      print ("\t\t\t\t\t\t\t\tForwarding Time" + str(time.time()-ti))
+      print ("\t\t\t\t\t\t\t\tForwarding Time: " + str(time.time()-ti))
 
       global imagesProcessed
       imagesProcessed += 1
