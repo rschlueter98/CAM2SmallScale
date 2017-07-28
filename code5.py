@@ -48,7 +48,7 @@ def loadStream(url):
   try:
     cap = cv2.VideoCapture(url)
     if (cap.isOpened()):
-      print ("Stream: " + str(len(loadedStreams)) + " loaded")
+      print ("Stream " + str(len(loadedStreams)) + " loaded")
       loadedStreams.append(cap)
   except:
       print (str(url) + " failed to load")
@@ -93,7 +93,7 @@ def downloadImage(stream, threadNo):
 
 
 def loadAnalysis():
-  model_filename = "prototxt/yolo_small_deploy.prototxt"
+  model_filename = "prototxt/yolomkl2017.prototxt"
   weight_filename = "yolo_small.caffemodel"
 
   net = caffe.Net(model_filename, weight_filename, caffe.TEST)
