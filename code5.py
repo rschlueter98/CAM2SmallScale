@@ -237,7 +237,7 @@ if __name__ == '__main__':
   print ("Number of streams opened: " + str(len(loadedStreams)))
 
   # Initial downloading of images
-  raw_input("Press Enter to begin downloading 1500 images, followed by running YOLO on those images")
+  # raw_input("Press Enter to begin downloading 1500 images, followed by running YOLO on those images")
   print ("Downloading initial image set")
   ti = time.time()
   downloadImages()
