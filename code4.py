@@ -11,9 +11,9 @@ GPU_ID = 0  # Switch between 0 and 1 depending on the GPU you want to use.
 caffe.set_mode_cpu()
 
 
-cores_load_max = 88*5#6
-cores_download_max = 88#2
-cores_yolo_max = 88#5
+cores_load_max = 8*5#6
+cores_download_max = 8#2
+cores_yolo_max = 8#5
 
 cores_load_current = []
 cores_download_current = []
@@ -112,13 +112,13 @@ def analyze(net, transformer):
       # img_filename = savedImagesPaths.pop()
       # img = caffe.io.load_image(img_filename)  # load the image using caffe io
       img = imageData.pop()
-      ti = time.time()
+      # ti = time.time()
       array = transformer.preprocess('data', img)
-      print ("\t\t\tPreprocess Time" + str(time.time() - ti))
+      # print ("\t\t\tPreprocess Time" + str(time.time() - ti))
 
-      ti = time.time()
+      # ti = time.time()
       out = net.forward_all(data=np.asarray([array]))
-      print ("\t\t\t\t\t\t\t\tForwarding Time: " + str(time.time()-ti))
+      # print ("\t\t\t\t\t\t\t\tForwarding Time: " + str(time.time()-ti))
 
       global imagesProcessed
       imagesProcessed += 1
