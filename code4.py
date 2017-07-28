@@ -93,7 +93,7 @@ def downloadImage(stream, threadNo):
 
 
 def loadAnalysis():
-  model_filename = "prototxt/yolomkl2017.prototxt"
+  model_filename = "prototxt/yolo_small_deploy.prototxt"
   weight_filename = "yolo_small.caffemodel"
 
   net = caffe.Net(model_filename, weight_filename, caffe.TEST)
