@@ -55,7 +55,7 @@ def loadStream(url):
   cores_load_current.pop()
 
 
-# Downloads images by running through the list of streams loaded previously and calling new threads (up to teh maximum
+# Downloads images by running through the list of streams loaded previously and calling new threads (up to the maximum
 # number specified) to download 100 images at a time from each of the streams, then free up the thread. Once a thread
 # is freed, it will load the next item in the list of loadedStreams and begin downloading images from that feed
 def downloadImages():
@@ -97,6 +97,7 @@ def downloadImage(stream, threadNo):
 
 
 def loadAnalysis():
+  print ("Loading network")
   model_filename = "prototxt/yolomkl2017.prototxt"
   weight_filename = "yolo_small.caffemodel"
 
@@ -105,6 +106,7 @@ def loadAnalysis():
   transformer = caffe.io.Transformer({'data': net.blobs['data'].data.shape})
   transformer.set_transpose('data', (2, 0, 1))
 
+  print ("Starting neural network threads")
   for x in range(cores_yolo_max):
     t = threading.Thread(target=analyze, args=(net, transformer,))
     t.start()
