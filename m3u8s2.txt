@@ -32,4 +32,3 @@ http://video3.earthcam.com/fecnetwork/4387.flv/playlist.m3u8
 http://video3.earthcam.com/fecnetwork/4465.flv/playlist.m3u8
 http://video3.earthcam.com/fecnetwork/4480.flv/playlist.m3u8
 http://video3.earthcam.com/fecnetwork/4518.flv/playlist.m3u8
-
