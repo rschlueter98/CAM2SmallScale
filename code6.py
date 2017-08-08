@@ -245,6 +245,7 @@ if __name__ == '__main__':
 
   downloadImages()
   while (len(cores_download_current) > 0):
+    print ("waiting on downloading threads to shut down")
     time.sleep(0.05)
   print ("Number of images downloaded: " + str(len(savedImagesPaths)))
 
