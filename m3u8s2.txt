@@ -43,3 +43,4 @@ http://video3.earthcam.com/fecnetwork/4918.flv/playlist.m3u8
 http://video3.earthcam.com/fecnetwork/4968.flv/playlist.m3u8
 http://video3.earthcam.com/fecnetwork/5019.flv/playlist.m3u8
 http://video3.earthcam.com/fecnetwork/5026.flv/playlist.m3u8
+http://video3.earthcam.com/fecnetwork/5034.flv/playlist.m3u8
