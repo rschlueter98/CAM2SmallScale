@@ -79,8 +79,15 @@ def downloadImages():
 # controlls threading, and decides which stream the threads should download from
 def downloadImage(stream, threadNo):
   path = "/home/ryan/Documents/Summer_Research/mMaster/imageOutput"
+  ti = time.time()
+  breaker = False
   for x in range(20):
+    if(breaker):
+      break
     try:
+      if ((time.time()-ti)>20):
+        breaker = True
+        break
       frame = stream.read()[1]
       # ti = time.time()
       frame = cv2.resize(frame, (448,448))
