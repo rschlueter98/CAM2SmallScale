@@ -86,6 +86,7 @@ def downloadImage(stream, threadNo):
       break
     try:
       if ((time.time()-ti)>20):
+        print ("DOWNLOADING TIMEOUT")
         breaker = True
         break
       frame = stream.read()[1]
@@ -138,7 +139,7 @@ def analyze(net, transformer):
 
       global startTime
       avg_fps = imagesProcessed / (time.time()-startTime)
-      print '\nFILE: {0} \tAvg FPS: {1}'.format(str(imagesProcessed), str(avg_fps)[:5])
+      print '\nIMG: {0} \tAvg FPS: {1}'.format(str(imagesProcessed), str(avg_fps)[:5])
       results = interpret_output(out['result'][0], img.shape[1], img.shape[0])  # fc27 instead of fc12 for yolo_small
       show_results(results)
       if (imagesProcessed > 10000):
@@ -264,6 +265,8 @@ if __name__ == '__main__':
   global imagesProcessed
   while True:
     if imagesProcessed > 10000:
+      print ("Done: Images Processed: " + str(imagesProcessed))
+      print ("Time elapsed: " + str(time.time() - startTime))
       exit()
     time.sleep(1)
     if len(imageData)<500:
