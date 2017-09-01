@@ -93,7 +93,7 @@ def downloadImage(stream, numToDownload):
 
 if __name__ == '__main__':
   # Input validation, makes sure numer of images was entered
-  if len(sys.argv == 0):
+  if (len(sys.argv) == 0):
     print ("Re-Run program with the following input:")
     print ("Python code6_downloadOnly XXXXX")
     print ("Where XXXXX is the number of images per stream to download")
