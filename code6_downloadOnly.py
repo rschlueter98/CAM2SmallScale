@@ -111,7 +111,7 @@ if __name__ == '__main__':
   # Sleep while streams are still being opened
   while(len(cores_load_current) > 0):
     time.sleep(0.05)
-  print ("Number of streams opened: " + str(len(loadedStreams)) + " in " + time.time()-ti + " seconds.")
+  print ("Number of streams opened: " + str(len(loadedStreams)) + " in " + str(time.time()-ti) + " seconds.")
 
 
   # Initial downloading of images
