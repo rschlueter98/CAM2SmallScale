@@ -99,8 +99,6 @@ if __name__ == '__main__':
   timeToDownload = int(sys.argv[1])
   timeToDownload = timeToDownload * 60
 
-  print ("This program downloads " + str(imagesPerStream) + " frames worth of image data, does not resize, does not save, does not process")
-
   global downloadCounter
   downloadCounter = 0
 
