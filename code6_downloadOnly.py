@@ -98,7 +98,7 @@ if __name__ == '__main__':
 
   if (len(sys.argv) <= 1):
     print ("Re-Run program with the following input:")
-    print ("Python code6_downloadOnly XXXXX")
+    print ("python code6_downloadOnly.py XXXXX")
     print ("Where XXXXX is the number of images per stream to download")
     exit()
   imagesPerStream = int(sys.argv[1])
