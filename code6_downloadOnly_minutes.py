@@ -56,11 +56,11 @@ def loadStream(url):
 # is freed, it will load the next item in the list of loadedStreams and begin downloading images from that feed
 def downloadImages(numToDownload):
   print ("Downloading images")
-  for x in range(len(loadedStreams)):
+  for x in range(len(timeToDownload)):
     opened = False
     while (not opened):
       if (len(cores_download_current) < cores_download_max):
-        t = threading.Thread(target=downloadImage, args=(loadedStreams[x], numToDownload,))
+        t = threading.Thread(target=downloadImage, args=(loadedStreams[x], timeToDownload,))
         t.start()
         cores_download_current.append(t)
         opened = True
@@ -70,24 +70,21 @@ def downloadImages(numToDownload):
 
 # Downloads 100 images from a specified stream. This function is called from the downloadImages function, which
 # controlls threading, and decides which stream the threads should download from
-def downloadImage(stream, numToDownload):
+def downloadImage(stream, timeToDownload):
   global downloadCounter
 
   breaker = False
-  for x in range(numToDownload):
+  ti = time.time()
+  while ((time.time()-ti)<timeToDownload):
     if(breaker):
       break
     try:
-      # if ((time.time()-ti)>20):
-      #   print ("DOWNLOADING TIMEOUT")
-      #   breaker = True
-      #   break
       frame = stream.read()[1]
       downloadCounter  = downloadCounter + 1
     except:
       print ("Bad Frame")
       pass
-  print ("Finished Downloading")
+  print ("Stream finished downloading")
   cores_download_current.pop()
 
 
@@ -97,9 +94,10 @@ if __name__ == '__main__':
   if (len(sys.argv) <= 1):
     print ("Re-Run program with the following input:")
     print ("python code6_downloadOnly.py XXXXX")
-    print ("Where XXXXX is the number of images per stream to download")
+    print ("Where XXXXX is the number of minutes you want to download for.")
     exit()
-  imagesPerStream = int(sys.argv[1])
+  timeToDownload = int(sys.argv[1])
+  timeToDownload = timeToDownload * 60
 
   print ("This program downloads " + str(imagesPerStream) + " frames worth of image data, does not resize, does not save, does not process")
 
@@ -120,9 +118,12 @@ if __name__ == '__main__':
   # Initial downloading of images
   print ("Downloading images")
   ti2 = time.time()
-  downloadImages(imagesPerStream)
+  downloadImages(timeToDownload)
   while (len(cores_download_current) > 0):
     # print (str(len(imageData)) + " images downloaded")
+    print ("Downloaded " + str(downloadCounter) + " in " + str(time.time() - ti2) + " seconds.")
+    print (str(downloadCounter / (time.time() - ti2)) + " FPS")
+
     print ("waiting on downloading threads to shut down. " + str(len(cores_download_current)) + " remaining")
     time.sleep(0.5)
   print ("Downloaded " + str(downloadCounter) + " in " + str(time.time()-ti2) + " seconds.")
