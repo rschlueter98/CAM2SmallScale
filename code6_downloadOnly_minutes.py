@@ -99,6 +99,7 @@ if __name__ == '__main__':
     exit()
   timeToDownload = int(sys.argv[1])
   timeToDownload = timeToDownload * 60
+  print ("timeToDownload: " + str(timeToDownload))
 
   global downloadCounter
   downloadCounter = 0
