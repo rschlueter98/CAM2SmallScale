@@ -98,7 +98,7 @@ if __name__ == '__main__':
     print ("Where XXXXX is the number of minutes you want to download for.")
     exit()
   timeToDownload = int(sys.argv[1])
-  timeToDownload = timeToDownload * 60))
+  timeToDownload = timeToDownload * 60
 
   global downloadCounter
   downloadCounter = 0
