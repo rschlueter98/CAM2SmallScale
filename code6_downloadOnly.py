@@ -101,8 +101,6 @@ if __name__ == '__main__':
     print ("Where XXXXX is the number of images per stream to download")
     exit()
   imagesPerStream = int(sys.argv[1])
-  print imagesPerStream
-  print type(imagesPerStream)
 
   print ("This program downloads " + str(imagesPerStream) + " frames worth of image data, does not resize, does not save, does not process")
 
@@ -125,7 +123,7 @@ if __name__ == '__main__':
   ti2 = time.time()
   downloadImages(imagesPerStream)
   while (len(cores_download_current) > 0):
-    print (str(len(imageData)) + " images downloaded")
+    # print (str(len(imageData)) + " images downloaded")
     print ("waiting on downloading threads to shut down. " + str(len(cores_download_current)) + " remaining")
     time.sleep(0.5)
   print ("Downloaded " + str(downloadCounter) + " in " + str(time.time()-ti2) + " seconds.")
