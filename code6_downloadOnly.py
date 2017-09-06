@@ -86,7 +86,6 @@ def downloadImage(stream, numToDownload):
         break
       frame = stream.read()[1]
       downloadCounter  = downloadCounter + 1
-      print ("khasdkfhasdkjf")
     except:
       print ("Bad Frame")
       pass
@@ -96,6 +95,7 @@ def downloadImage(stream, numToDownload):
 
 if __name__ == '__main__':
   # Input validation, makes sure numer of images was entered
+  print (len(sys.argv))
   if (len(sys.argv) == 0):
     print ("Re-Run program with the following input:")
     print ("Python code6_downloadOnly XXXXX")
