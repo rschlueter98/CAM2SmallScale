@@ -85,6 +85,7 @@ def downloadImage(stream, numToDownload):
         break
       frame = stream.read()[1]
       downloadCounter  = downloadCounter + 1
+      print ("khasdkfhasdkjf")
     except:
       print ("Bad Frame")
       pass
