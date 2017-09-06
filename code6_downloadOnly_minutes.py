@@ -56,7 +56,7 @@ def loadStream(url):
 # is freed, it will load the next item in the list of loadedStreams and begin downloading images from that feed
 def downloadImages(numToDownload):
   print ("Downloading images")
-  for x in range(len(timeToDownload)):
+  for x in range((timeToDownload)):
     opened = False
     while (not opened):
       if (len(cores_download_current) < cores_download_max):
