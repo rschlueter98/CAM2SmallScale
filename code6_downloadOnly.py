@@ -31,7 +31,7 @@ StartTime = 0
 # Controls the number of feeds to be opened with how many threads. Currently reads in from an input text file of
 # m3u8 feeds links. Can be altered to read in from ip cameras as well
 def loadStreams():
-  streamsDatabase = open("m3u8s3.txt")
+  streamsDatabase = open("m3u8s2.txt")
   for line in streamsDatabase:
     t = threading.Thread(target=loadStream, args=(line,))
     t.start()
@@ -66,7 +66,6 @@ def downloadImages(numToDownload):
         opened = True
       else:
         time.sleep(0.01)
-  print ("Images downloaded")
 
 
 # Downloads 100 images from a specified stream. This function is called from the downloadImages function, which
