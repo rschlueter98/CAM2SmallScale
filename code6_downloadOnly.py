@@ -95,13 +95,14 @@ def downloadImage(stream, numToDownload):
 
 if __name__ == '__main__':
   # Input validation, makes sure numer of images was entered
-  print (len(sys.argv))
-  if (len(sys.argv) == 0):
+
+  if (len(sys.argv) <= 1):
     print ("Re-Run program with the following input:")
     print ("Python code6_downloadOnly XXXXX")
     print ("Where XXXXX is the number of images per stream to download")
-  # imagesPerStream = int(sys.argv[0])
-  imagesPerStream = 10
+  imagesPerStream = int(sys.argv[1])
+  print imagesPerStream
+  print type(imagesPerStream)
 
   print ("This program downloads " + str(imagesPerStream) + " frames worth of image data, does not resize, does not save, does not process")
 
