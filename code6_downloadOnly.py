@@ -79,10 +79,10 @@ def downloadImage(stream, numToDownload):
     if(breaker):
       break
     try:
-      if ((time.time()-ti)>20):
-        print ("DOWNLOADING TIMEOUT")
-        breaker = True
-        break
+      # if ((time.time()-ti)>20):
+      #   print ("DOWNLOADING TIMEOUT")
+      #   breaker = True
+      #   break
       frame = stream.read()[1]
       downloadCounter  = downloadCounter + 1
     except:
@@ -115,7 +115,7 @@ if __name__ == '__main__':
   # Sleep while streams are still being opened
   while(len(cores_load_current) > 0):
     time.sleep(0.05)
-  print ("Number of streams opened: " + str(len(loadedStreams)) + " in " + str(time.time()-ti) + " seconds.")
+  print ("All streams opened. Downloading now")
 
 
   # Initial downloading of images
