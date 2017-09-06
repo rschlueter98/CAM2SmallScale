@@ -100,6 +100,7 @@ if __name__ == '__main__':
     print ("Re-Run program with the following input:")
     print ("Python code6_downloadOnly XXXXX")
     print ("Where XXXXX is the number of images per stream to download")
+    exit()
   imagesPerStream = int(sys.argv[1])
   print imagesPerStream
   print type(imagesPerStream)
