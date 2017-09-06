@@ -88,6 +88,7 @@ def downloadImage(stream, numToDownload):
     except:
       print ("Bad Frame")
       pass
+  print ("Finished Downloading")
   cores_download_current.pop()
 
 
@@ -121,7 +122,7 @@ if __name__ == '__main__':
   while (len(cores_download_current) > 0):
     print (str(len(imageData)) + " images downloaded")
     print ("waiting on downloading threads to shut down. " + str(len(cores_download_current)) + " remaining")
-    time.sleep(0.05)
+    time.sleep(0.5)
   print ("Downloaded " + str(downloadCounter) + " in " + time.time()-ti2 + " seconds.")
   print (str(downloadCounter/(time.time()-ti2)) + " FPS")
 
