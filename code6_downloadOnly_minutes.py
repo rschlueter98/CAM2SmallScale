@@ -75,9 +75,9 @@ def downloadImage(stream, timeToDownload):
   global downloadCounter
 
   breaker = False
-  ti = time.time()
-  while ((time.time()-ti)<timeToDownload):
-    print (time.time()-ti)
+  start = time.time()
+  while ((time.time()-start)<timeToDownload):
+    print (time.time()-start)
     if(breaker):
       break
     try:
