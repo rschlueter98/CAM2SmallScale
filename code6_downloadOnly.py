@@ -72,6 +72,7 @@ def downloadImages(numToDownload):
 # Downloads 100 images from a specified stream. This function is called from the downloadImages function, which
 # controlls threading, and decides which stream the threads should download from
 def downloadImage(stream, numToDownload):
+  print ("downloading stream: " + str(stream))
   global downloadCounter
 
   breaker = False
