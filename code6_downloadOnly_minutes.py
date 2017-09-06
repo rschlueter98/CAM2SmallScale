@@ -56,7 +56,7 @@ def loadStream(url):
 # is freed, it will load the next item in the list of loadedStreams and begin downloading images from that feed
 def downloadImages(numToDownload):
   print ("Downloading images")
-  for x in range((timeToDownload)):
+  for x in range((len(loadedStreams))):
     opened = False
     while (not opened):
       if (len(cores_download_current) < cores_download_max):
@@ -98,8 +98,7 @@ if __name__ == '__main__':
     print ("Where XXXXX is the number of minutes you want to download for.")
     exit()
   timeToDownload = int(sys.argv[1])
-  timeToDownload = timeToDownload * 60
-  print ("timeToDownload: " + str(timeToDownload))
+  timeToDownload = timeToDownload * 60))
 
   global downloadCounter
   downloadCounter = 0
