@@ -47,9 +47,15 @@ imageData = []
 def loadStreams(streams_file):
   streamsDatabase = open(streams_file)
   for line in streamsDatabase:
-    t = threading.Thread(target=loadStream, args=(line,))
-    t.start()
-    cores_load_current.append(t)
+    opened = False
+    while (not opened):
+      if(len(cores_load_current) < cores_load_max):
+        t = threading.Thread(target=loadStream, args=(line,))
+        t.start()
+        cores_load_current.append(t)
+        opened = True
+      else:
+        time.sleep(0.01)
 
 
 # Function to load one individual stream. Called from the loadStreams
