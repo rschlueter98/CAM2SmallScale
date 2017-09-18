@@ -1,13 +1,13 @@
 #######################################################################################################################
-#Header
-#This was made by Ryan Schlueter rschlueter98@gmail.com, (314) 603-4504, BSEE '18 on September 18th 2017
-#I'm not a coder, so don't hate if this doesn't follow PEP-8 or whatever other standards
+# Header
+# This was made by Ryan Schlueter rschlueter98@gmail.com, (314) 603-4504, BSEE '18 on September 18th 2017
+# I'm not a coder, so don't hate if this doesn't follow PEP-8 or whatever other standards
 #
-#This program runs through a set of images and runs my new yolo analysis on them
-#Run it with: python YOLO_only.py <input_filename>
-#input_filename is the filename of the text file full of images paths you want to run yolo on
+# This program runs through a set of images and runs my new yolo analysis on them
+# Run it with: python YOLO_only.py <input_filename>
+# input_filename is the filename of the text file full of images paths you want to run yolo on
 #
-#No output files, classes and coords are displayed as something is found
+# No output files, classes and coords are displayed as something is found
 #######################################################################################################################
 
 

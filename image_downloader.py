@@ -29,8 +29,8 @@ caffe.set_mode_cpu()
 #Downloading cores are normally 1-1.5x the number of cores you have
 #Yolo cores are normally only as many the number of cores you have
 #If you're compiling with Intel's Zeon Phi instruction set, mess around with these numbers. Their compilation is weird
-cores_load_max = 500
-cores_download_max = 500
+cores_load_max = 88
+cores_download_max = 88
 cores_yolo_max = 88
 
 #Active core counters for various functions
