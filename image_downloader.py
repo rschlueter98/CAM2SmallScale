@@ -152,7 +152,7 @@ if __name__ == '__main__':
 
   # Initial downloading of images
   print ("Downloading images")
-  ti = time.time()
+  ti2 = time.time()
   downloadImages(sys.argv[1],int(sys.argv[2]))
   while (len(cores_download_current) > 0):
     # print (str(len(imageData)) + " images downloaded")
