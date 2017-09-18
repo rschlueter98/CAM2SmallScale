@@ -56,22 +56,33 @@ def loadStream(url):
 # Downloads images by running through the list of streams loaded previously and calling new threads (up to the maximum
 # number specified) to download 100 images at a time from each of the streams, then free up the thread. Once a thread
 # is freed, it will load the next item in the list of loadedStreams and begin downloading images from that feed
-def downloadImages(numToDownload):
+def downloadImages(type, input):
   print ("Downloading images")
-  for x in range((len(loadedStreams))):
-    opened = False
-    while (not opened):
-      if (len(cores_download_current) < cores_download_max):
-        t = threading.Thread(target=downloadImage, args=(loadedStreams[x], timeToDownload,))
-        t.start()
-        cores_download_current.append(t)
-        opened = True
-      else:
-        time.sleep(0.01)
+  if (type =="num"):
+    for x in range((len(loadedStreams))):
+      opened = False
+      while (not opened):
+        if (len(cores_download_current) < cores_download_max):
+          t = threading.Thread(target=numDownloadImage, args=(loadedStreams[x], input,))
+          t.start()
+          cores_download_current.append(t)
+          opened = True
+        else:
+          time.sleep(0.01)
+  if (type == "time"):
+    for x in range((len(loadedStreams))):
+      opened = False
+      while (not opened):
+        if (len(cores_download_current) < cores_download_max):
+          t = threading.Thread(target=timeDownloadImage, args=(loadedStreams[x], input,))
+          t.start()
+          cores_download_current.append(t)
+          opened = True
+        else:
+          time.sleep(0.01)
 
 
-# Downloads 100 images from a specified stream. This function is called from the downloadImages function, which
-# controlls threading, and decides which stream the threads should download from
+# Downloads images for a set time
 def timeDownloadImage(stream, timeToDownload):
   global downloadCounter
 
@@ -89,6 +100,7 @@ def timeDownloadImage(stream, timeToDownload):
   cores_download_current.pop()
 
 
+# Downloads a set number of images
 def numDownloadImage(stream, numToDownload):
   global downloadCounter
 
@@ -113,11 +125,7 @@ if __name__ == '__main__':
     print ("Re-Run program with the following input:")
     print ("python image_download.py <num>or<time> <amount of time in hours>or<number of image>")
     exit()
-  if (sys.argv[1] == "num"):
-   type = 0
-  elif (sys.argv[1] == "time"):
-    type = 1
-  else:
+  if ((sys.argv[1] != "num") and (sys.argv[1] != "time"))
     print("Re-run with proper input args")
 
   global downloadCounter
@@ -138,10 +146,7 @@ if __name__ == '__main__':
   print ("Downloading images")
   global ti2
   ti2 = time.time()
-  if type:
-    timeDownloadImages(sys.argv[2]*60)
-  else:
-    numDownloadImage(sys.argv[2])
+  downloadImages(sys.argv[1],sys.argv[2])
   while (len(cores_download_current) > 0):
     # print (str(len(imageData)) + " images downloaded")
     print ("Downloaded " + str(downloadCounter) + " in " + str(time.time() - ti2) + " seconds.")
