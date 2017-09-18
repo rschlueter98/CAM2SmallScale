@@ -1,4 +1,17 @@
-#run with python image_downloader.py <num>or<time> and <amount of time in hours>or<number of image> per stream
+#######################################################################################################################
+#Woo header
+#This was made by Ryan Schlueter rschlueter98@gmail.com, (314) 603-4504, BSEE '18
+#I'm not a coder, so don't hate if this doesn't follow PEP-8 or whatever other standards
+#
+#This program downloads images from a list of m3u8 streams. It doesn't save them or run yolo or anything
+#Run it with: python image_downloader.py <input_filename> <type> <inputValue>
+#input_filename is the filename of m3u8 streams you want to download from
+#type is either "num" or "time" based of if you want to download for x minutes, or download x images
+#inputValue is the above mentioned x. Like 5000 images, or 60 minutes
+#
+#No output files, FPS is display at the end
+#######################################################################################################################
+
 
 import threading
 import time
@@ -11,24 +24,23 @@ GPU_ID = 0  # Switch between 0 and 1 depending on the GPU you want to use.
 # caffe.set_device(GPU_ID)
 caffe.set_mode_cpu()
 
-
+#Change these number of cores based of whatever system you are running it on
+#I normally used 5*<however_many_threads_your_cpu_has> for loading cores. This is entirely network bound
+#Downloading cores are normally 1-1.5x the number of cores you have
+#Yolo cores are normally only as many the number of cores you have
+#If you're compiling with Intel's Zeon Phi instruction set, mess around with these numbers. Their compilation is weird
 cores_load_max = 8*5#6
 cores_download_max = 8#2
 cores_yolo_max = 8#5
 
+#Active core counters for various functions
 cores_load_current = []
 cores_download_current = []
 cores_yolo_current = []
 
+#List and queue for loaded streads and downloaded image data
 loadedStreams = []
 imageData = []
-
-global saveThreadCounter
-saveThreadCounter = 0
-global imagesProcessed
-imagesProcessed = 0
-global StartTime
-StartTime = 0
 
 # Controls the number of feeds to be opened with how many threads. Currently reads in from an input text file of
 # m3u8 feeds links. Can be altered to read in from ip cameras as well
@@ -40,8 +52,7 @@ def loadStreams():
     cores_load_current.append(t)
 
 
-# Function to load one individual stream. Called from the loadStreams function, which controls threading for loading
-# image feeds.
+# Function to load one individual stream. Called from the loadStreams
 def loadStream(url):
   try:
     cap = cv2.VideoCapture(url)
@@ -53,9 +64,7 @@ def loadStream(url):
   cores_load_current.pop()
 
 
-# Downloads images by running through the list of streams loaded previously and calling new threads (up to the maximum
-# number specified) to download 100 images at a time from each of the streams, then free up the thread. Once a thread
-# is freed, it will load the next item in the list of loadedStreams and begin downloading images from that feed
+# Controls number of threads being used for downloading images. Also chooses num or time based off input args
 def downloadImages(type, input):
   print ("Downloading images")
   if (type =="num"):
@@ -87,7 +96,8 @@ def timeDownloadImage(stream, timeToDownload):
   global downloadCounter
   timeToDownload = timeToDownload*60
   breaker = False
-  while ((time.time()-ti2)<timeToDownload):
+  startTime = time.time()
+  while ((time.time()-startTime)<timeToDownload):
     if(breaker):
       break
     try:
@@ -119,7 +129,6 @@ def numDownloadImage(stream, numToDownload):
 
 if __name__ == '__main__':
   # Input validation, makes sure numer of images was entered
-
   if (len(sys.argv) <= 2):
     print ("Re-Run program with the following input:")
     print ("python image_download.py <num>or<time> <amount of time in hours>or<number of image>")
@@ -143,8 +152,7 @@ if __name__ == '__main__':
 
   # Initial downloading of images
   print ("Downloading images")
-  global ti2
-  ti2 = time.time()
+  ti = time.time()
   downloadImages(sys.argv[1],int(sys.argv[2]))
   while (len(cores_download_current) > 0):
     # print (str(len(imageData)) + " images downloaded")
