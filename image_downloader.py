@@ -113,9 +113,9 @@ if __name__ == '__main__':
     print ("Re-Run program with the following input:")
     print ("python image_download.py <num>or<time> <amount of time in hours>or<number of image>")
     exit()
-  if (sys.argv[1] = "num"):
+  if (sys.argv[1] == "num"):
    type = 0
-  else if (sys.argv[1] = "time"):
+  else if (sys.argv[1] == "time"):
     type = 1
   else:
     print("Re-run with proper input args")
