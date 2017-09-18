@@ -85,7 +85,7 @@ def downloadImages(type, input):
 # Downloads images for a set time
 def timeDownloadImage(stream, timeToDownload):
   global downloadCounter
-
+  timeToDownload = timeToDownload*60
   breaker = False
   while ((time.time()-ti2)<timeToDownload):
     if(breaker):
