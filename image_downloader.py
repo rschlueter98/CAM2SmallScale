@@ -115,7 +115,7 @@ if __name__ == '__main__':
     exit()
   if (sys.argv[1] == "num"):
    type = 0
-  else if (sys.argv[1] == "time"):
+  elif (sys.argv[1] == "time"):
     type = 1
   else:
     print("Re-run with proper input args")
