@@ -147,7 +147,7 @@ if __name__ == '__main__':
   print ("Downloading images")
   global ti2
   ti2 = time.time()
-  downloadImages(sys.argv[1],sys.argv[2])
+  downloadImages(sys.argv[1],int(sys.argv[2]))
   while (len(cores_download_current) > 0):
     # print (str(len(imageData)) + " images downloaded")
     print ("Downloaded " + str(downloadCounter) + " in " + str(time.time() - ti2) + " seconds.")
