@@ -103,8 +103,6 @@ def timeDownloadImage(stream, timeToDownload):
 # Downloads a set number of images
 def numDownloadImage(stream, numToDownload):
   global downloadCounter
-  print numToDownload
-  print type(numToDownload)
   breaker = False
   for x in range(numToDownload):
     if(breaker):
