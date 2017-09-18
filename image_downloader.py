@@ -58,7 +58,6 @@ def loadStream(url):
     cap = cv2.VideoCapture(url)
     if (cap.isOpened()):
       print ("Stream " + str(len(loadedStreams)) + " loaded")
-      print (url)
       loadedStreams.append(cap)
   except:
       print (str(url) + " failed to load")
