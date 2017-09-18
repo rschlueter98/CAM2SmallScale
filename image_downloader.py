@@ -100,7 +100,7 @@ def downloadImages(type, input):
 # Downloads images for a set time
 def timeDownloadImage(stream, timeToDownload):
   global downloadCounter
-  timeToDownload = timeToDownload
+  timeToDownload = timeToDownload * 60
   breaker = False
   startTime = time.time()
   while ((time.time()-startTime)<timeToDownload):
