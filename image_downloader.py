@@ -120,9 +120,6 @@ if __name__ == '__main__':
   else:
     print("Re-run with proper input args")
 
-  timeToDownload = int(sys.argv[1])
-  timeToDownload = timeToDownload * 60
-
   global downloadCounter
   downloadCounter = 0
 
