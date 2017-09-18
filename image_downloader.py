@@ -1,6 +1,6 @@
 #######################################################################################################################
-#Woo header
-#This was made by Ryan Schlueter rschlueter98@gmail.com, (314) 603-4504, BSEE '18
+#Header
+#This was made by Ryan Schlueter rschlueter98@gmail.com, (314) 603-4504, BSEE '18 on Sep. 18th 2017
 #I'm not a coder, so don't hate if this doesn't follow PEP-8 or whatever other standards
 #
 #This program downloads images from a list of m3u8 streams. It doesn't save them or run yolo or anything
