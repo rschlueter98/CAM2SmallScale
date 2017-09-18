@@ -44,8 +44,8 @@ imageData = []
 
 # Controls the number of feeds to be opened with how many threads. Currently reads in from an input text file of
 # m3u8 feeds links. Can be altered to read in from ip cameras as well
-def loadStreams():
-  streamsDatabase = open("m3u8s2.txt")
+def loadStreams(streams_file):
+  streamsDatabase = open(streams_file)
   for line in streamsDatabase:
     t = threading.Thread(target=loadStream, args=(line,))
     t.start()
@@ -129,11 +129,12 @@ def numDownloadImage(stream, numToDownload):
 
 if __name__ == '__main__':
   # Input validation, makes sure numer of images was entered
-  if (len(sys.argv) <= 2):
+  if (len(sys.argv) <= 3):
     print ("Re-Run program with the following input:")
-    print ("python image_download.py <num>or<time> <amount of time in hours>or<number of image>")
+    print ("\npython image_download.py <input_filename> <type> <amount>\n")
+    print ("Check the header/docs for more info")
     exit()
-  if ((sys.argv[1] != "num") and (sys.argv[1] != "time")):
+  if ((sys.argv[2] != "num") and (sys.argv[2] != "time")):
     print("Re-run with proper input args")
 
   global downloadCounter
@@ -143,7 +144,7 @@ if __name__ == '__main__':
   # Initial loading of streams
   ti = time.time()
   print ("Loading Streams")
-  loadStreams()
+  loadStreams(sys.argv[1])
   # Sleep while streams are still being opened
   while(len(cores_load_current) > 0):
     time.sleep(0.05)
@@ -153,7 +154,7 @@ if __name__ == '__main__':
   # Initial downloading of images
   print ("Downloading images")
   ti2 = time.time()
-  downloadImages(sys.argv[1],int(sys.argv[2]))
+  downloadImages(sys.argv[1],int(sys.argv[3]))
   while (len(cores_download_current) > 0):
     # print (str(len(imageData)) + " images downloaded")
     print ("Downloaded " + str(downloadCounter) + " in " + str(time.time() - ti2) + " seconds.")
