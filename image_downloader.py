@@ -168,6 +168,8 @@ if __name__ == '__main__':
   print ("\n\n")
   print (fpses)
   print ("\n\n")
+  print (times)
+  print ("\n\n")
   print (str(downloadCounter/(time.time()-ti2)) + " FPS")
 
 
