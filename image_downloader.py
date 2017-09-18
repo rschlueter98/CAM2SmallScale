@@ -140,7 +140,7 @@ if __name__ == '__main__':
   global downloadCounter
   downloadCounter = 0
   fpses = []
-
+  times = []
 
   # Initial loading of streams
   ti = time.time()
@@ -161,6 +161,7 @@ if __name__ == '__main__':
     print ("Downloaded " + str(downloadCounter) + " in " + str(time.time() - ti2) + " seconds.")
     print (str(downloadCounter / (time.time() - ti2)) + " FPS")
     fpses.append(str(downloadCounter / (time.time() - ti2)))
+    times.append(time.time() - ti2)
     print ("waiting on downloading threads to shut down. " + str(len(cores_download_current)) + " remaining")
     time.sleep(0.5)
   print ("Downloaded " + str(downloadCounter) + " in " + str(time.time()-ti2) + " seconds.")
