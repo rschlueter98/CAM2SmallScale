@@ -160,7 +160,7 @@ if __name__ == '__main__':
     # print (str(len(imageData)) + " images downloaded")
     print ("Downloaded " + str(downloadCounter) + " in " + str(time.time() - ti2) + " seconds.")
     print (str(downloadCounter / (time.time() - ti2)) + " FPS")
-    fpses.append(str(downloadCounter / (time.time() - ti2))
+    fpses.append(str(downloadCounter / (time.time() - ti2)))
     print ("waiting on downloading threads to shut down. " + str(len(cores_download_current)) + " remaining")
     time.sleep(0.5)
   print ("Downloaded " + str(downloadCounter) + " in " + str(time.time()-ti2) + " seconds.")
