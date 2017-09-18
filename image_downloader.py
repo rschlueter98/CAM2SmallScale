@@ -125,7 +125,7 @@ if __name__ == '__main__':
     print ("Re-Run program with the following input:")
     print ("python image_download.py <num>or<time> <amount of time in hours>or<number of image>")
     exit()
-  if ((sys.argv[1] != "num") and (sys.argv[1] != "time"))
+  if ((sys.argv[1] != "num") and (sys.argv[1] != "time")):
     print("Re-run with proper input args")
 
   global downloadCounter
