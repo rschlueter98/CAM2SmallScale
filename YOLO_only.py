@@ -46,76 +46,6 @@ imagesProcessed = 0
 global StartTime
 StartTime = 0
 
-# Controls the number of feeds to be opened with how many threads. Currently reads in from an input text file of
-# m3u8 feeds links. Can be altered to read in from ip cameras as well
-def loadStreams():
-  streamsDatabase = open("m3u8s2.txt")
-  for line in streamsDatabase:
-    t = threading.Thread(target=loadStream, args=(line,))
-    t.start()
-    cores_load_current.append(t)
-
-
-# Function to load one individual stream. Called from the loadStreams function, which controls threading for loading
-# image feeds.
-def loadStream(url):
-  try:
-    cap = cv2.VideoCapture(url)
-    if (cap.isOpened()):
-      print ("Stream " + str(len(loadedStreams)) + " loaded")
-      loadedStreams.append(cap)
-  except:
-      print (str(url) + " failed to load")
-  cores_load_current.pop()
-
-
-# Downloads images by running through the list of streams loaded previously and calling new threads (up to the maximum
-# number specified) to download 100 images at a time from each of the streams, then free up the thread. Once a thread
-# is freed, it will load the next item in the list of loadedStreams and begin downloading images from that feed
-def downloadImages():
-  print ("Downloading images")
-  threadNo = 0
-  for x in range(len(loadedStreams)):
-    opened = False
-    while (not opened):
-      if (len(cores_download_current) < cores_download_max):
-        t = threading.Thread(target=downloadImage, args=(loadedStreams[x], threadNo,))
-        t.start()
-        threadNo += 1
-        cores_download_current.append(t)
-        opened = True
-      else:
-        time.sleep(0.01)
-  print ("Images downloaded")
-
-
-# Downloads 100 images from a specified stream. This function is called from the downloadImages function, which
-# controlls threading, and decides which stream the threads should download from
-def downloadImage(stream, threadNo):
-  path = "/home/ryan/Documents/Summer_Research/mMaster/imageOutput"
-  ti = time.time()
-  breaker = False
-  for x in range(20):
-    if(breaker):
-      break
-    try:
-      if ((time.time()-ti)>20):
-        print ("DOWNLOADING TIMEOUT")
-        breaker = True
-        break
-      frame = stream.read()[1]
-      # ti = time.time()
-      frame = cv2.resize(frame, (448,448))
-      # print ("Resizing time" + str(time.time()-ti))
-      # filename = ("z_" + "n" + str(saveThreadCounter) + "t" + str(threadNo) + "img" + str(x) + ".jpg")
-      # fullpath = os.path.join(path, filename)
-      # cv2.imwrite(str(fullpath), frame)
-      # savedImagesPaths.append(fullpath)
-      imageData.append(frame)
-    except:
-      print ("Bad Frame")
-      pass
-  cores_download_current.pop()
 
 
 def loadAnalysis():
@@ -132,6 +62,7 @@ def loadAnalysis():
   for x in range(cores_yolo_max):
     t = threading.Thread(target=analyze, args=(net, transformer,))
     t.start()
+
 
 def analyze(net, transformer):
   try:
@@ -156,9 +87,6 @@ def analyze(net, transformer):
       print '\nIMG: {0} \tAvg FPS: {1}'.format(str(imagesProcessed), str(avg_fps)[:5])
       results = interpret_output(out['result'][0], img.shape[1], img.shape[0])  # fc27 instead of fc12 for yolo_small
       show_results(results)
-      if (imagesProcessed > 10000):
-        print ("Thread Exiting")
-        exit()
   except KeyboardInterrupt:
     print ("Exiting")
     exit()
@@ -274,17 +202,3 @@ if __name__ == '__main__':
 
   # Load yolo model and start analysis
   loadAnalysis()
-
-  # Looping analyzing and downloading more
-  global imagesProcessed
-  while True:
-    if imagesProcessed > 10000:
-      print ("Done: Images Processed: " + str(imagesProcessed))
-      print ("Time elapsed: " + str(time.time() - startTime))
-      exit()
-    time.sleep(1)
-    if len(imageData)<500:
-      downloadImages()
-      while(len(cores_download_current)>0):
-        time.sleep(0.5)
-
