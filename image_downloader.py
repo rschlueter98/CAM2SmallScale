@@ -52,6 +52,7 @@ def loadStreams(streams_file):
       if(len(cores_load_current) < cores_load_max):
         t = threading.Thread(target=loadStream, args=(line,))
         t.start()
+        time.sleep(10)
         cores_load_current.append(t)
         opened = True
       else:
