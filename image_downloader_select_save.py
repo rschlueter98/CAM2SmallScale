@@ -144,7 +144,8 @@ def numDownloadImage(stream, numToDownload, saveImage):
         # savedImagesPaths.append(fullpath)
       imageData.append(frame)
       downloadCounter  = downloadCounter + 1
-    except:
+    except Exception as e:
+      print e
       print ("Bad Frame")
       pass
   print ("Stream finished downloading")
