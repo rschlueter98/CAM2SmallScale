@@ -111,7 +111,7 @@ def timeDownloadImage(stream, timeToDownload, saveImage):
     try:
       frame = stream.read()[1]
       if (saveImage):
-        filename = ("z_" + "n" + str(saveThreadCounter) + "t" + str(threadNo) + "img" + str(x) + ".jpg")
+        filename = ("z_" + str(downloadCounter) + ".jpg")
         fullpath = os.path.join(path, filename)
         cv2.imwrite(str(fullpath), frame)
         # savedImagesPaths.append(fullpath)
