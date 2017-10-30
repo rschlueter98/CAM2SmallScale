@@ -194,12 +194,15 @@ if __name__ == '__main__':
     times.append(time.time() - ti2)
     print ("waiting on downloading threads to shut down. " + str(len(cores_download_current)) + " remaining")
     time.sleep(0.5)
-  print ("Downloaded " + str(downloadCounter) + " in " + str(time.time()-ti2) + " seconds.")
+  endTime = time.time()
   print ("\n\n")
+  print ("FPSes")
   print (fpses)
   print ("\n\n")
+  print ("Times")
   print (times)
   print ("\n\n")
-  print (str(downloadCounter/(time.time()-ti2)) + " FPS")
+  print ("Downloaded " + str(downloadCounter) + " in " + str(endTime - ti2) + " seconds.")
+  print (str(downloadCounter/(endTime-ti2)) + " FPS")
 
 
