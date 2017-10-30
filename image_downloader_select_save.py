@@ -53,7 +53,7 @@ def loadStreams(streams_file):
         t = threading.Thread(target=loadStream, args=(line,))
         t.start()
         cores_load_current.append(t)
-        time.sleep(1)
+        time.sleep(0.01)
         opened = True
       else:
         time.sleep(0.01)
@@ -112,7 +112,8 @@ def timeDownloadImage(stream, timeToDownload, saveImage):
       frame = stream.read()[1]
       if (saveImage):
         filename = ("z_" + str(downloadCounter) + ".jpg")
-        fullpath = os.path.join(path, filename)
+        # fullpath = os.path.join(path, filename)
+        fullpath = (str(path) + "/" + filename)
         cv2.imwrite(str(fullpath), frame)
         # savedImagesPaths.append(fullpath)
       imageData.append(frame)
@@ -136,9 +137,9 @@ def numDownloadImage(stream, numToDownload, saveImage):
       frame = stream.read()[1]
       if(saveImage):
         filename = ("z_" + str(downloadCounter) + ".jpg")
-        print filename
+        # print filename
         # fullpath = os.path.join(path, filename)
-        print ("It's Tryin")
+        # print ("It's Tryin")
         fullpath = (str(path) + "/" + filename)
         # print (fullpath)
         cv2.imwrite(str(fullpath), frame)
