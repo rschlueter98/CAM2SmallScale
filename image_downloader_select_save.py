@@ -149,33 +149,6 @@ def numDownloadImage(stream, numToDownload, saveImage):
 
 
 
-
-
-# Downloads 100 images from a specified stream. This function is called from the downloadImages function, which
-# controlls threading, and decides which stream the threads should download from
-def downloadImage(stream, threadNo, saveImages):
-  path = "/export/purdue/ryanTesting/saveTesting"
-  frame = stream.read()[1]
-    # ti = time.time()
-    frame = cv2.resize(frame, (448,448))
-    # print ("Resizing time" + str(time.time()-ti))
-    if(saveImages):
-      filename = ("z_" + "n" + str(saveThreadCounter) + "t" + str(threadNo) + "img" + str(x) + ".jpg")
-      fullpath = os.path.join(path, filename)
-      cv2.imwrite(str(fullpath), frame)
-      # savedImagesPaths.append(fullpath)
-    imageData.append(frame)
-    except:
-      print ("Bad Frame")
-      pass
-  cores_download_current.pop()
-
-
-
-
-
-
-
 if __name__ == '__main__':
   # Input validation, makes sure numer of images was entered
   if (len(sys.argv) <= 4):
