@@ -72,14 +72,14 @@ def loadStream(url):
 
 
 # Controls number of threads being used for downloading images. Also chooses num or time based off input args
-def downloadImages(type, input):
+def downloadImages(type, input, saveImage):
   print ("Downloading images")
   if (type =="num"):
     for x in range((len(loadedStreams))):
       opened = False
       while (not opened):
         if (len(cores_download_current) < cores_download_max):
-          t = threading.Thread(target=numDownloadImage, args=(loadedStreams[x], input,))
+          t = threading.Thread(target=numDownloadImage, args=(loadedStreams[x], input, saveImage,))
           t.start()
           cores_download_current.append(t)
           opened = True
@@ -90,7 +90,7 @@ def downloadImages(type, input):
       opened = False
       while (not opened):
         if (len(cores_download_current) < cores_download_max):
-          t = threading.Thread(target=timeDownloadImage, args=(loadedStreams[x], input,))
+          t = threading.Thread(target=timeDownloadImage, args=(loadedStreams[x], input, saveImage,))
           t.start()
           cores_download_current.append(t)
           opened = True
@@ -99,8 +99,9 @@ def downloadImages(type, input):
 
 
 # Downloads images for a set time
-def timeDownloadImage(stream, timeToDownload):
+def timeDownloadImage(stream, timeToDownload, saveImage):
   global downloadCounter
+  path = "/export/purdue/ryanTesting/saveTesting"
   timeToDownload = timeToDownload * 60
   breaker = False
   startTime = time.time()
@@ -109,7 +110,13 @@ def timeDownloadImage(stream, timeToDownload):
       break
     try:
       frame = stream.read()[1]
-      downloadCounter  = downloadCounter + 1
+      if (saveImage):
+        filename = ("z_" + "n" + str(saveThreadCounter) + "t" + str(threadNo) + "img" + str(x) + ".jpg")
+        fullpath = os.path.join(path, filename)
+        cv2.imwrite(str(fullpath), frame)
+        # savedImagesPaths.append(fullpath)
+      imageData.append(frame)
+      downloadCounter = downloadCounter + 1
     except:
       print ("Bad Frame")
       pass
@@ -118,14 +125,21 @@ def timeDownloadImage(stream, timeToDownload):
 
 
 # Downloads a set number of images
-def numDownloadImage(stream, numToDownload):
+def numDownloadImage(stream, numToDownload, saveImage):
   global downloadCounter
+  path = "/export/purdue/ryanTesting/saveTesting"
   breaker = False
   for x in range(numToDownload):
     if(breaker):
       break
     try:
       frame = stream.read()[1]
+      if(saveImage):
+        filename = ("z_" + "n" + str(saveThreadCounter) + "t" + str(threadNo) + "img" + str(x) + ".jpg")
+        fullpath = os.path.join(path, filename)
+        cv2.imwrite(str(fullpath), frame)
+        # savedImagesPaths.append(fullpath)
+      imageData.append(frame)
       downloadCounter  = downloadCounter + 1
     except:
       print ("Bad Frame")
@@ -134,11 +148,39 @@ def numDownloadImage(stream, numToDownload):
   cores_download_current.pop()
 
 
+
+
+
+# Downloads 100 images from a specified stream. This function is called from the downloadImages function, which
+# controlls threading, and decides which stream the threads should download from
+def downloadImage(stream, threadNo, saveImages):
+  path = "/export/purdue/ryanTesting/saveTesting"
+  frame = stream.read()[1]
+    # ti = time.time()
+    frame = cv2.resize(frame, (448,448))
+    # print ("Resizing time" + str(time.time()-ti))
+    if(saveImages):
+      filename = ("z_" + "n" + str(saveThreadCounter) + "t" + str(threadNo) + "img" + str(x) + ".jpg")
+      fullpath = os.path.join(path, filename)
+      cv2.imwrite(str(fullpath), frame)
+      # savedImagesPaths.append(fullpath)
+    imageData.append(frame)
+    except:
+      print ("Bad Frame")
+      pass
+  cores_download_current.pop()
+
+
+
+
+
+
+
 if __name__ == '__main__':
   # Input validation, makes sure numer of images was entered
-  if (len(sys.argv) <= 3):
+  if (len(sys.argv) <= 4):
     print ("Re-Run program with the following input:")
-    print ("\npython image_download.py <input_filename> <type> <amount>\n")
+    print ("\npython image_download.py <input_filename> <type> <amount> <save type>\n")
     print ("Check the header/docs for more info")
     exit()
   if ((sys.argv[2] != "num") and (sys.argv[2] != "time")):
@@ -162,7 +204,7 @@ if __name__ == '__main__':
   # Initial downloading of images
   print ("Downloading images")
   ti2 = time.time()
-  downloadImages(sys.argv[2],int(sys.argv[3]))
+  downloadImages(sys.argv[2],int(sys.argv[3]), sys.argv[4])
   while (len(cores_download_current) > 0):
     # print (str(len(imageData)) + " images downloaded")
     print ("Downloaded " + str(downloadCounter) + " in " + str(time.time() - ti2) + " seconds.")
