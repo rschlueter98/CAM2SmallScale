@@ -116,7 +116,8 @@ def timeDownloadImage(stream, timeToDownload, saveImage):
         fullpath = (str(path) + "/" + filename)
         cv2.imwrite(str(fullpath), frame)
         # savedImagesPaths.append(fullpath)
-      imageData.append(frame)
+      else:
+        imageData.append(frame)
       downloadCounter = downloadCounter + 1
     except:
       print ("Bad Frame")
@@ -144,7 +145,8 @@ def numDownloadImage(stream, numToDownload, saveImage):
         # print (fullpath)
         cv2.imwrite(str(fullpath), frame)
         # savedImagesPaths.append(fullpath)
-      imageData.append(frame)
+      else:
+        imageData.append(frame)
       downloadCounter  = downloadCounter + 1
     except Exception as e:
       print e
