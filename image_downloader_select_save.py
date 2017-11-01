@@ -68,7 +68,7 @@ def loadStream(url):
       print ("Stream " + str(len(loadedStreams)) + " loaded")
       loadedStreams.append(cap)
       temp = url.split("/")[4]
-      temp = temp.split(".")[1]
+      temp = temp.split(".")[0]
       streamNames.append(temp)
   except:
       print (str(url) + " failed to load")
