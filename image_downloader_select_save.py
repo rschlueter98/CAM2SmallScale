@@ -40,6 +40,7 @@ cores_yolo_current = []
 
 #List and queue for loaded streads and downloaded image data
 loadedStreams = []
+streamNames = []
 imageData = []
 
 # Controls the number of feeds to be opened with how many threads. Currently reads in from an input text file of
