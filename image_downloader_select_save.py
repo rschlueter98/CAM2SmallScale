@@ -140,7 +140,6 @@ def numDownloadImage(stream, streamName, numToDownload, saveImage):
       frame = stream.read()[1]
       if(saveImage):
         filename = ("z_" + str(streamName) + str(downloadCounter) + ".jpg")
-        print(streamName)
         fullpath = (str(path) + "/" + filename)
         cv2.imwrite(str(fullpath), frame)
       else:
