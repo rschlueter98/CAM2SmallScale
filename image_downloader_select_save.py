@@ -66,6 +66,9 @@ def loadStream(url):
     if (cap.isOpened()):
       print ("Stream " + str(len(loadedStreams)) + " loaded")
       loadedStreams.append(cap)
+      temp = url.split("/")[5]
+      temp = temp.split(".")[1]
+      streamNames.append(temp)
   except:
       print (str(url) + " failed to load")
   cores_load_current.pop()
@@ -79,7 +82,7 @@ def downloadImages(type, input, saveImage):
       opened = False
       while (not opened):
         if (len(cores_download_current) < cores_download_max):
-          t = threading.Thread(target=numDownloadImage, args=(loadedStreams[x], input, saveImage,))
+          t = threading.Thread(target=numDownloadImage, args=(loadedStreams[x], streamNames[x], input, saveImage,))
           t.start()
           cores_download_current.append(t)
           opened = True
@@ -90,7 +93,7 @@ def downloadImages(type, input, saveImage):
       opened = False
       while (not opened):
         if (len(cores_download_current) < cores_download_max):
-          t = threading.Thread(target=timeDownloadImage, args=(loadedStreams[x], input, saveImage,))
+          t = threading.Thread(target=timeDownloadImage, args=(loadedStreams[x], streamNames[x],  input, saveImage,))
           t.start()
           cores_download_current.append(t)
           opened = True
@@ -99,7 +102,7 @@ def downloadImages(type, input, saveImage):
 
 
 # Downloads images for a set time
-def timeDownloadImage(stream, timeToDownload, saveImage):
+def timeDownloadImage(stream, streamName, timeToDownload, saveImage):
   global downloadCounter
   path = "/export/purdue/ryanTesting/saveTesting"
   timeToDownload = timeToDownload * 60
@@ -112,10 +115,9 @@ def timeDownloadImage(stream, timeToDownload, saveImage):
       frame = stream.read()[1]
       if (saveImage):
         filename = ("z_" + str(downloadCounter) + ".jpg")
-        # fullpath = os.path.join(path, filename)
+        print (streamName)
         fullpath = (str(path) + "/" + filename)
         cv2.imwrite(str(fullpath), frame)
-        # savedImagesPaths.append(fullpath)
       else:
         imageData.append(frame)
       downloadCounter = downloadCounter + 1
@@ -127,7 +129,7 @@ def timeDownloadImage(stream, timeToDownload, saveImage):
 
 
 # Downloads a set number of images
-def numDownloadImage(stream, numToDownload, saveImage):
+def numDownloadImage(stream, streamName, numToDownload, saveImage):
   global downloadCounter
   path = "/homes/rschluet/batchDownloadForYolo"
   breaker = False
@@ -138,7 +140,7 @@ def numDownloadImage(stream, numToDownload, saveImage):
       frame = stream.read()[1]
       if(saveImage):
         filename = ("z_" + str(downloadCounter) + ".jpg")
-        print(stream)
+        print(streamName)
         fullpath = (str(path) + "/" + filename)
         cv2.imwrite(str(fullpath), frame)
       else:
