@@ -111,7 +111,6 @@ def timeDownloadImage(stream, timeToDownload, saveImage):
     try:
       frame = stream.read()[1]
       if (saveImage):
-        print(type(stream))
         filename = ("z_" + str(downloadCounter) + ".jpg")
         # fullpath = os.path.join(path, filename)
         fullpath = (str(path) + "/" + filename)
@@ -139,13 +138,9 @@ def numDownloadImage(stream, numToDownload, saveImage):
       frame = stream.read()[1]
       if(saveImage):
         filename = ("z_" + str(downloadCounter) + ".jpg")
-        # print filename
-        # fullpath = os.path.join(path, filename)
-        # print ("It's Tryin")
+        print(stream)
         fullpath = (str(path) + "/" + filename)
-        # print (fullpath)
         cv2.imwrite(str(fullpath), frame)
-        # savedImagesPaths.append(fullpath)
       else:
         imageData.append(frame)
       downloadCounter  = downloadCounter + 1
