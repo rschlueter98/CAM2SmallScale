@@ -67,7 +67,7 @@ def loadStream(url):
     if (cap.isOpened()):
       print ("Stream " + str(len(loadedStreams)) + " loaded")
       loadedStreams.append(cap)
-      temp = url.split("/")[5]
+      temp = url.split("/")[4]
       temp = temp.split(".")[1]
       streamNames.append(temp)
   except:
