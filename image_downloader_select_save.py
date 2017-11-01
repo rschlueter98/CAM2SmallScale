@@ -111,6 +111,7 @@ def timeDownloadImage(stream, timeToDownload, saveImage):
     try:
       frame = stream.read()[1]
       if (saveImage):
+        print(stream)
         filename = ("z_" + str(downloadCounter) + ".jpg")
         # fullpath = os.path.join(path, filename)
         fullpath = (str(path) + "/" + filename)
