@@ -20,7 +20,7 @@ def downloadImages(inputFile):
 
         temp = line.split("/")[4]
         temp = temp.split(".")[0]
-        FPS = count/30
+        FPS = count/5
 
         print(str(temp) + "\t" + str(FPS))
         outputFile.write(str(temp) + "\t" + str(FPS))
