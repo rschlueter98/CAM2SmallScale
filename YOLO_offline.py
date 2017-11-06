@@ -30,7 +30,7 @@ StartTime = 0
 
 
 def loadImages(inputFile):
-  path = "/home/ryan/Documents/Summer_Research/CAM2SmallScale/"
+  path = "/homes/rschluet/batchDownloadForYolo/"
   for line in inputFile:
     wholeName = path + line
     try:
