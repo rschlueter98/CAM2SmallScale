@@ -33,6 +33,7 @@ def loadImages(inputFile):
   path = "/homes/rschluet/batchDownloadForYolo/"
   for line in inputFile:
     wholeName = path + line
+    print(wholeName)
     try:
       frame = cv2.imread(wholeName)
       frame = cv2.resize(frame, (448,448))
