@@ -178,9 +178,9 @@ if __name__ == '__main__':
   # Initial loading of threads
   ti = time.time()
 
-  inputFile = open("images.txt")
+  inputFile = open("images.txt", 'r')
 
-  loadImages(inputFile, 'r')
+  loadImages(inputFile)
 
   downloadImages()
   while (len(cores_download_current) > 0):
