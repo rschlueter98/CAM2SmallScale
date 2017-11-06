@@ -181,7 +181,8 @@ if __name__ == '__main__':
   ti = time.time()
 
   inputFile = open("images.txt", 'r')
-  print(inputFile)
+  for line in inputFile:
+    print(line)
   loadImages(inputFile)
 
   # Load yolo model and start analysis
