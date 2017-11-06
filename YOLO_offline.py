@@ -29,26 +29,13 @@ global StartTime
 StartTime = 0
 
 
-def loadImages():
-  path = "/home/ryan/Documents/Summer_Research/mMaster/imageOutput"
-  ti = time.time()
-  breaker = False
-  for x in range(20):
-    if(breaker):
-      break
+def loadImages(inputFile):
+  path = "/home/ryan/Documents/Summer_Research/CAM2SmallScale/"
+  for line in inputFile:
+    wholeName = path + line
     try:
-      if ((time.time()-ti)>20):
-        print ("DOWNLOADING TIMEOUT")
-        breaker = True
-        break
-      frame = stream.read()[1]
-      # ti = time.time()
+      frame = cv2.imread(wholeName)
       frame = cv2.resize(frame, (448,448))
-      # print ("Resizing time" + str(time.time()-ti))
-      # filename = ("z_" + "n" + str(saveThreadCounter) + "t" + str(threadNo) + "img" + str(x) + ".jpg")
-      # fullpath = os.path.join(path, filename)
-      # cv2.imwrite(str(fullpath), frame)
-      # savedImagesPaths.append(fullpath)
       imageData.append(frame)
     except:
       print ("Bad Frame")
@@ -190,18 +177,10 @@ if __name__ == '__main__':
   saveThreadCounter = 0
   # Initial loading of threads
   ti = time.time()
-  print ("Loading Streams")
-  loadStreams()
-  while(len(cores_load_current) > 0):
-    time.sleep(0.05)
-  print ("Number of streams opened: " + str(len(loadedStreams)))
 
-  # Initial downloading of images
-  # raw_input("Press Enter to begin downloading 1500 images, followed by running YOLO on those images")
-  print ("Downloading initial image set")
-  ti = time.time()
-  global startTime
-  startTime = time.time()
+  inputFile = open("images.txt")
+
+  loadImages(inputFile, 'r')
 
   downloadImages()
   while (len(cores_download_current) > 0):
