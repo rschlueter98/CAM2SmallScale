@@ -30,16 +30,14 @@ StartTime = 0
 
 
 def loadImages(inputFile):
-  print(("alsjfkaflkajb"))
-  path = "/homes/rschluet/batchDownloadForYolo/"
+  path = "/homes/rschluet/batchDownloadForYOLO/"
   for line in inputFile:
     wholeName = path + line
-    print(wholeName)
+    print("Appended" + wholeName)
     try:
       frame = cv2.imread(wholeName)
       frame = cv2.resize(frame, (448,448))
       imageData.append(frame)
-      print(("appended"))
 
     except:
       print ("Bad Frame")
@@ -187,5 +185,5 @@ if __name__ == '__main__':
   loadImages(inputFile)
 
   # Load yolo model and start analysis
-  loadAnalysis()
+  # loadAnalysis()
 
