@@ -9,7 +9,7 @@ import time
 def downloadImages(inputFile):
     for line in inputFile:
         count=0
-        cap = cv2.VideoCapture(url)
+        stream = cv2.VideoCapture(line)
         ti = time.time()
         while((time.time()-ti)<60):
             frame = stream.read()[1]
