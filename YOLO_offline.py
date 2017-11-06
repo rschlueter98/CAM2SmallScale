@@ -37,6 +37,7 @@ def loadImages(inputFile):
       frame = cv2.imread(wholeName)
       frame = cv2.resize(frame, (448,448))
       imageData.append(frame)
+
     except:
       print ("Bad Frame")
       pass
@@ -62,6 +63,9 @@ def analyze(net, transformer):
       breaker = False
       # img_filename = savedImagesPaths.pop()
       # img = caffe.io.load_image(img_filename)  # load the image using caffe io
+      if (len(imageData) <= 0):
+        print ("Thread Exiting")
+        exit()
       img = imageData.pop()
       # ti = time.time()
       array = transformer.preprocess('data', img)
@@ -79,9 +83,7 @@ def analyze(net, transformer):
       print '\nIMG: {0} \tAvg FPS: {1}'.format(str(imagesProcessed), str(avg_fps)[:5])
       results = interpret_output(out['result'][0], img.shape[1], img.shape[0])  # fc27 instead of fc12 for yolo_small
       show_results(results)
-      if (len(imageData) <= 0):
-        print ("Thread Exiting")
-        exit()
+
   except KeyboardInterrupt:
     print ("Exiting")
     exit()
