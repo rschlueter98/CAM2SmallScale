@@ -10,11 +10,11 @@ def downloadImages(inputFile):
     for line in inputFile:
         count=0
         stream = cv2.VideoCapture(line)
-        print("New Stream")
+        # print("New Stream")
         ti = time.time()
         while((time.time()-ti)<10):
             frame = stream.read()[1]
-            print("Frame Downloaded")
+            # print("Frame Downloaded")
             if((time.time()-ti>5)):
                 count=count+1
 
