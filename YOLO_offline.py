@@ -81,7 +81,7 @@ def analyze(net, transformer):
       print '\nIMG: {0} \tAvg FPS: {1}'.format(str(imagesProcessed), str(avg_fps)[:5])
       results = interpret_output(out['result'][0], img.shape[1], img.shape[0])  # fc27 instead of fc12 for yolo_small
       show_results(results)
-      if (imagesProcessed > 10000):
+      if (len(imageData) <= 0):
         print ("Thread Exiting")
         exit()
   except KeyboardInterrupt:
@@ -184,17 +184,4 @@ if __name__ == '__main__':
 
   # Load yolo model and start analysis
   loadAnalysis()
-
-  # Looping analyzing and downloading more
-  global imagesProcessed
-  while True:
-    if imagesProcessed > 10000:
-      print ("Done: Images Processed: " + str(imagesProcessed))
-      print ("Time elapsed: " + str(time.time() - startTime))
-      exit()
-    time.sleep(1)
-    if len(imageData)<500:
-      downloadImages()
-      while(len(cores_download_current)>0):
-        time.sleep(0.5)
 
