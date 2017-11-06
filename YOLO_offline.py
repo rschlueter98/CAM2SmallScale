@@ -40,8 +40,6 @@ def loadImages(inputFile):
     except:
       print ("Bad Frame")
       pass
-  cores_download_current.pop()
-
 
 def loadAnalysis():
   print ("Loading network")
