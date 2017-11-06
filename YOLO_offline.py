@@ -33,7 +33,8 @@ def loadImages(inputFile):
   path = "/homes/rschluet/batchDownloadForYOLO/"
   for line in inputFile:
     wholeName = path + line
-    print("Appended" + wholeName)
+    print("Appended")
+    print(wholeName)
     try:
       frame = cv2.imread(wholeName)
       frame = cv2.resize(frame, (448,448))
@@ -181,8 +182,6 @@ if __name__ == '__main__':
   ti = time.time()
 
   inputFile = open("images.txt", 'r')
-  for line in inputFile:
-    print(line)
   loadImages(inputFile)
 
   # Load yolo model and start analysis
