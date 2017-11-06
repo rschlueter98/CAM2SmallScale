@@ -37,6 +37,7 @@ def loadImages(inputFile):
       frame = cv2.imread(wholeName)
       frame = cv2.resize(frame, (448,448))
       imageData.append(frame)
+      print(("appended"))
 
     except:
       print ("Bad Frame")
@@ -66,6 +67,7 @@ def analyze(net, transformer):
       if (len(imageData) <= 0):
         print ("Thread Exiting")
         exit()
+      print(("finding stuff"))
       img = imageData.pop()
       # ti = time.time()
       array = transformer.preprocess('data', img)
