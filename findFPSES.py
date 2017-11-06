@@ -20,8 +20,8 @@ def downloadImages(inputFile):
         temp = temp.split(".")[0]
         FPS = count/30
 
-        print(temp + "\t" + FPS)
-        outputFile.write(temp + "\t" + FPS)
+        print(str(temp) + "\t" + str(FPS))
+        outputFile.write(str(temp) + "\t" + str(FPS))
 
 if __name__ == '__main__':
   inputFile = open("m3u8s.txt", 'r')
