@@ -26,12 +26,16 @@ def downloadImages(inputFile):
         except:
             print(str(temp) + "\t" + "failed")
             outputFile.write(str(temp) + "\t" + "failed")
+            outputFile.close()
+            exit()
 
 
 if __name__ == '__main__':
-  inputFile = open("m3u8s.txt", 'r')
-  outputFile = open("wholeSetFPSES.txt", 'w')
-  downloadImages(inputFile)
+    inputFile = open("m3u8s.txt", 'r')
+    outputFile = open("wholeSetFPSES.txt", 'w')
+    downloadImages(inputFile)
 
-  # Load yolo model and start analysis
-  # loadAnalysis()
+    inputFile.close()
+    outputFile.close()
+    # Load yolo model and start analysis
+    #  loadAnalysis()
