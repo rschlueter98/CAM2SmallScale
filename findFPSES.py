@@ -15,7 +15,7 @@ def downloadImages(inputFile, outputFile):
             stream = cv2.VideoCapture(line)
             earthcamID = line.split("/")[4]
             earthcamID = earthcamID.split(".")[0]
-            print(("Checking: " + earthcamID))
+            # print(("Checking: " + earthcamID))
             ti = time.time()
             while((time.time()-ti)<120):
                 frame = stream.read()[1]
