@@ -11,8 +11,8 @@ def downloadImages(inputFile, outputFile):
         count=0
         try:
             stream = cv2.VideoCapture(line)
-            temp = line.split("/")[4]
-            temp = temp.split(".")[0]
+            earthcamID = line.split("/")[4]
+            earthcamID = earthcamID.split(".")[0]
 
             ti = time.time()
             while((time.time()-ti)<120):
@@ -24,11 +24,12 @@ def downloadImages(inputFile, outputFile):
 
             FPS = count/60
 
-            print(str(temp) + "\t" + str(FPS))
-            outputFile.write(str(temp) + "\t" + str(FPS))
-        except:
-            print(str(temp) + "\t" + "failed")
-            outputFile.write(str(temp) + "\t" + "failed")
+            print(str(earthcamID) + "\t" + str(FPS))
+            outputFile.write(str(earthcamID) + "\t" + str(FPS))
+        except as e:
+            print(e)
+            print(str(earthcamID) + "\t" + "failed")
+            outputFile.write(str(earthcamID) + "\t" + "failed")
             outputFile.close()
             exit()
 
