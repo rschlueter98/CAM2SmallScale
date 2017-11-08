@@ -16,6 +16,7 @@ def downloadImages(inputFile, outputFile):
                 frame = stream.read()[1]
                 if((time.time()-ti>60)):
                     count=count+1
+                    print(count + ": " + (count/(time.time()-(ti-60))))
 
             temp = line.split("/")[4]
             temp = temp.split(".")[0]
