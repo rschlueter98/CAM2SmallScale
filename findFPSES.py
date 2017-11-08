@@ -19,7 +19,7 @@ def downloadImages(inputFile, outputFile):
                 frame = stream.read()[1]
                 if((time.time()-ti>60)):
                     count=count+1
-                    print(count + ": " + (count/(time.time()-(ti+60))))
+                    print(str(count) + ": " + str(count/(time.time()-(ti+60))))
 
 
             FPS = count/60
