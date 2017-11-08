@@ -26,7 +26,7 @@ def downloadImages(inputFile, outputFile):
 
             print(str(earthcamID) + "\t" + str(FPS))
             outputFile.write(str(earthcamID) + "\t" + str(FPS))
-        except e:
+        except Exception as  e:
             print(e)
             print(str(earthcamID) + "\t" + "failed")
             outputFile.write(str(earthcamID) + "\t" + "failed")
