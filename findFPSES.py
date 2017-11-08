@@ -9,6 +9,8 @@ import time
 def downloadImages(inputFile, outputFile):
     for line in inputFile:
         count=0
+        max=0
+        average=0
         try:
             stream = cv2.VideoCapture(line)
             earthcamID = line.split("/")[4]
@@ -19,13 +21,14 @@ def downloadImages(inputFile, outputFile):
                 frame = stream.read()[1]
                 if((time.time()-ti>60)):
                     count=count+1
-                    print(str(count) + ": " + str(count/(time.time()-(ti+60))))
+                    average=count/(time.time()-(ti+60))
+                    if (average>max):
+                        max=average
+                    # print(str(count) + ": " + str(count/(time.time()-(ti+60))))
 
-
-            FPS = count/60
-
-            print(str(earthcamID) + "\t" + str(FPS))
-            outputFile.write(str(earthcamID) + "\t" + str(FPS))
+            output = str(earthcamID) + "\tMax: " + str(max) + "\tAverage" + str(average)
+            print(output)
+            outputFile.write(output)
         except Exception as  e:
             print(e)
             print(str(earthcamID) + "\t" + "failed")
