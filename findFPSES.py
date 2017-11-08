@@ -24,9 +24,10 @@ def downloadImages(inputFile, outputFile):
                     average=count/(time.time()-(ti+60))
                     if (average>max):
                         max=average
+                        maxTime = time.time()-(ti+60)
                     # print(str(count) + ": " + str(count/(time.time()-(ti+60))))
 
-            output = str(earthcamID) + "\tMax: " + str(max) + "\tAverage" + str(average)
+            output = str(earthcamID) + "\tAverage:\t" + str(average) + "\tMax:\t" + str(max) + "\tat\t" +maxTime
             print(output)
             outputFile.write(output)
         except Exception as  e:
