@@ -11,6 +11,9 @@ def downloadImages(inputFile, outputFile):
         count=0
         try:
             stream = cv2.VideoCapture(line)
+            temp = line.split("/")[4]
+            temp = temp.split(".")[0]
+
             ti = time.time()
             while((time.time()-ti)<120):
                 frame = stream.read()[1]
@@ -18,8 +21,7 @@ def downloadImages(inputFile, outputFile):
                     count=count+1
                     print(count + ": " + (count/(time.time()-(ti+60))))
 
-            temp = line.split("/")[4]
-            temp = temp.split(".")[0]
+
             FPS = count/60
 
             print(str(temp) + "\t" + str(FPS))
