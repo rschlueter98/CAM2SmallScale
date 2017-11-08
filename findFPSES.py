@@ -27,7 +27,7 @@ def downloadImages(inputFile, outputFile):
                         maxTime = time.time()-(ti+60)
                     # print(str(count) + ": " + str(count/(time.time()-(ti+60))))
 
-            output = str(earthcamID) + "\tAverage:\t" + str(average) + "\tMax:\t" + str(max) + "\tat\t" +maxTime
+            output = str(earthcamID) + "\tAverage:\t" + str(average) + "\tMax:\t" + str(max) + "\tat\t" + str(maxTime)
             print(output)
             outputFile.write(output)
         except Exception as  e:
