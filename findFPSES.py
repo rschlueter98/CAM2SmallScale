@@ -6,7 +6,7 @@ import time
 
 
 
-def downloadImages(inputFile):
+def downloadImages(inputFile, outputFile):
     for line in inputFile:
         count=0
         try:
@@ -33,7 +33,7 @@ def downloadImages(inputFile):
 if __name__ == '__main__':
     inputFile = open("m3u8sDownloadingAll.txt", 'r')
     outputFile = open("wholeSetFPSES.txt", 'w')
-    downloadImages(inputFile)
+    downloadImages(inputFile, outputFile)
 
     inputFile.close()
     outputFile.close()
