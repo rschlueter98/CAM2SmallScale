@@ -5,7 +5,7 @@ import cv2
 import time
 import datetime
 # Path to save the frames
-RESULTS_PATH = "/home/sara/week1test"
+RESULTS_PATH = "/homes/rschluet/SaraCode"
 
 def checkCamera():
     source = "http://video3.earthcam.com/fecnetwork/4054.flv/playlist.m3u8"
@@ -36,7 +36,7 @@ def checkCamera():
             # Save the image.
             file_name = '{}/{}.jpg'.format(cam_directory,datetime.datetime.fromtimestamp(
                         capture_time).strftime('%Y-%m-%d_%H-%M-%S-%f'))
-            cv2.imwrite(file_name, frame)
+            cv2.imwrite(str(file_name), frame)
             c = c + 1
             vc.release()
             time.sleep(interval)
