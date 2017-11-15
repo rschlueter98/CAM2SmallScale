@@ -27,15 +27,18 @@ def downloadImages(inputFile, outputFile):
                         maxTime = time.time()-(ti+60)
                     # print(str(count) + ": " + str(count/(time.time()-(ti+60))))
 
+            stream.release()
             output = str(earthcamID) + "\tAverage:\t" + str(average) + "\tMax:\t" + str(max) + "\tat\t" + str(maxTime)
             print(output)
-            outputFile.write(output)
+            outputFile.write(output + "\n")
         except Exception as  e:
             print(e)
+            stream.release()
             print(str(earthcamID) + "\t" + "failed")
-            outputFile.write(str(earthcamID) + "\t" + "failed")
-            outputFile.close()
-            exit()
+            outputFile.write(str(earthcamID) + "\t" + "failed" + "\n")
+            # outputFile.close()
+            # exit()
+    outputFile.close()
 
 
 if __name__ == '__main__':
